@@ -1,0 +1,9 @@
+dist
+dist-e2e
+coverage
+node_modules
+playwright-report
+test-results
+package-lock.json
+public/samples
+*.snap

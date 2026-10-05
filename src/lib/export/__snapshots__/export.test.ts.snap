@@ -1,0 +1,57 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`toSrt > matches the snapshot 1`] = `
+"1
+00:00:00,000 --> 00:00:02,047
+Hola a todos,
+bienvenidos a Letritas.
+
+2
+00:00:02,100 --> 00:00:03,097
+Hoy les muestro
+
+3
+00:00:03,150 --> 00:00:05,198
+cómo crear subtítulos
+animados en segundos.
+
+4
+00:00:05,250 --> 00:00:07,298
+¡Y todo funciona
+en tu navegador,
+
+5
+00:00:07,350 --> 00:00:09,397
+sin subir nada
+a ningún servidor!
+"
+`;
+
+exports[`toVtt > matches the snapshot 1`] = `
+"WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.047
+Hola a todos,
+bienvenidos a Letritas.
+
+2
+00:00:02.100 --> 00:00:03.097
+Hoy les muestro
+
+3
+00:00:03.150 --> 00:00:05.198
+cómo crear subtítulos
+animados en segundos.
+
+4
+00:00:05.250 --> 00:00:07.298
+¡Y todo funciona
+en tu navegador,
+
+5
+00:00:07.350 --> 00:00:09.397
+sin subir nada
+a ningún servidor!
+"
+`;

@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`buildCaptions > matches the snapshot for vertical video 1`] = `
+[
+  {
+    "end": 2.047,
+    "start": 0,
+    "text": "Hola a todos, bienvenidos a Letritas.",
+  },
+  {
+    "end": 3.097,
+    "start": 2.1,
+    "text": "Hoy les muestro",
+  },
+  {
+    "end": 5.198,
+    "start": 3.15,
+    "text": "cómo crear subtítulos animados en segundos.",
+  },
+  {
+    "end": 7.298,
+    "start": 5.25,
+    "text": "¡Y todo funciona en tu navegador,",
+  },
+  {
+    "end": 9.397,
+    "start": 7.35,
+    "text": "sin subir nada a ningún servidor!",
+  },
+]
+`;
