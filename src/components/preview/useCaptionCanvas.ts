@@ -1,4 +1,5 @@
 import { useEffect, type RefObject } from 'react';
+import { ensureFontLoaded } from '../../lib/render/fonts';
 import { findActiveCaption, renderCaptions } from '../../lib/render/renderer';
 import { usePlayback } from '../../state/playback';
 import { useAppStore } from '../../state/store';
@@ -86,8 +87,13 @@ export function useCaptionCanvas(
     video.addEventListener('seeked', redraw);
     video.addEventListener('loadeddata', redraw);
     const unsubscribe = useAppStore.subscribe((state, prev) => {
+      const style = state.doc?.style;
+      // Canvas text doesn't trigger web font loading reliably: load it, then redraw.
+      if (style && style !== prev.doc?.style) void ensureFontLoaded(style).then(redraw);
       if (state.doc !== prev.doc && video.paused) redraw();
     });
+    const initialStyle = useAppStore.getState().doc?.style;
+    if (initialStyle) void ensureFontLoaded(initialStyle).then(redraw);
     const resize = new ResizeObserver(redraw);
     resize.observe(canvas);
     const onFonts = () => redraw();

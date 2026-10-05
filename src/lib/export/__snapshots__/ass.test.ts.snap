@@ -1,0 +1,86 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`toAss > matches the snapshot for the classic preset 1`] = `
+"[Script Info]
+Title: Letritas
+ScriptType: v4.00+
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Inter,96,&H00FFFFFF,&H004DE1FF,&H00000000,&H66000000,-1,0,0,0,100,100,0,0,1,11.5,3.8,2,162,162,461,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.00,Default,,0,0,0,,Hola a todos,
+Dialogue: 0,0:00:01.05,0:00:02.64,Default,,0,0,0,,bienvenidos\\Na Letritas. Hoy
+"
+`;
+
+exports[`toAss > matches the snapshot for the karaoke preset 1`] = `
+"[Script Info]
+Title: Letritas
+ScriptType: v4.00+
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Poppins,100,&H00FFFFFF,&H008D4DFF,&H00000000,&H66000000,-1,0,0,0,100,100,0,0,1,10,4,2,162,162,461,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.00,Default,,0,0,0,,{\\kf30}Hola {\\k5}{\\kf30}a {\\k5}{\\kf30}todos,
+Dialogue: 0,0:00:01.05,0:00:02.64,Default,,0,0,0,,{\\kf30}bienvenidos\\N{\\k5}{\\kf30}a {\\k5}{\\kf30}Letritas. {\\k5}{\\kf30}Hoy
+"
+`;
+
+exports[`toAss > matches the snapshot for the minimal preset 1`] = `
+"[Script Info]
+Title: Letritas
+ScriptType: v4.00+
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Inter,73,&H00FFFFFF,&H004DE1FF,&H66000000,&H66000000,0,0,0,0,100,100,0,0,3,14.6,0,2,162,162,461,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.00,Default,,0,0,0,,Hola a todos,
+Dialogue: 0,0:00:01.05,0:00:02.64,Default,,0,0,0,,bienvenidos\\Na Letritas. Hoy
+"
+`;
+
+exports[`toAss > matches the snapshot for the tiktok preset 1`] = `
+"[Script Info]
+Title: Letritas
+ScriptType: v4.00+
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Montserrat,125,&H00FFFFFF,&H004DE1FF,&H00000000,&H26000000,-1,0,0,0,100,100,0,0,1,20,7.5,5,162,162,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.35,Default,,0,0,0,,{\\c&H004DE1FF}HOLA{\\r} {\\alpha&HFF&}A{\\r} {\\alpha&HFF&}TODOS,{\\r}
+Dialogue: 0,0:00:00.35,0:00:00.70,Default,,0,0,0,,HOLA {\\c&H004DE1FF}A{\\r} {\\alpha&HFF&}TODOS,{\\r}
+Dialogue: 0,0:00:00.70,0:00:01.00,Default,,0,0,0,,HOLA A {\\c&H004DE1FF}TODOS,{\\r}
+Dialogue: 0,0:00:01.05,0:00:01.40,Default,,0,0,0,,{\\c&H004DE1FF}BIENVENIDOS{\\r}\\N{\\alpha&HFF&}A{\\r} {\\alpha&HFF&}LETRITAS.{\\r} {\\alpha&HFF&}HOY{\\r}
+Dialogue: 0,0:00:01.40,0:00:01.75,Default,,0,0,0,,BIENVENIDOS\\N{\\c&H004DE1FF}A{\\r} {\\alpha&HFF&}LETRITAS.{\\r} {\\alpha&HFF&}HOY{\\r}
+Dialogue: 0,0:00:01.75,0:00:02.10,Default,,0,0,0,,BIENVENIDOS\\NA {\\c&H004DE1FF}LETRITAS.{\\r} {\\alpha&HFF&}HOY{\\r}
+Dialogue: 0,0:00:02.10,0:00:02.64,Default,,0,0,0,,BIENVENIDOS\\NA LETRITAS. {\\c&H004DE1FF}HOY{\\r}
+"
+`;

@@ -1,11 +1,19 @@
 import type { Caption } from '../../lib/captions/types';
+import { computeEmojiMap } from '../../lib/render/emojis';
 
-const EMPTY = new Map<string, string>();
+const EMPTY: ReadonlyMap<string, string> = new Map();
+let lastCaptions: readonly Caption[] | null = null;
+let lastMap: ReadonlyMap<string, string> = EMPTY;
 
-/** Phase 3 fills this with keyword emojis; until then, no emojis. */
+/** Memoized per captions array (immutable), so the per-frame render loop doesn't recompute it. */
 export function getEmojiMap(
-  _captions: readonly Caption[],
+  captions: readonly Caption[],
   enabled: boolean,
 ): ReadonlyMap<string, string> {
-  return enabled ? EMPTY : EMPTY;
+  if (!enabled) return EMPTY;
+  if (captions !== lastCaptions) {
+    lastCaptions = captions;
+    lastMap = computeEmojiMap(captions);
+  }
+  return lastMap;
 }

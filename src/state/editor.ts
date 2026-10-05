@@ -9,8 +9,57 @@ import {
 import { splitIndexAt } from '../lib/captions/edit';
 import { replaceAll, type SearchOptions } from '../lib/captions/search';
 import { createHistory, pushHistory, redo, undo, type PushOptions } from '../lib/history/history';
+import { buildCaptions } from '../lib/captions/buildCaptions';
+import { defaultRulesFor, orientationOf } from '../lib/captions/rules';
+import type { LineRules } from '../lib/captions/types';
+import { getPreset } from '../lib/render/presets';
+import type { CaptionStyle } from '../lib/render/style';
 import { usePlayback } from './playback';
 import { useAppStore, type ProjectDoc } from './store';
+
+/** Changes style properties. Slider drags on the same property merge into one undo step. */
+export function setStyle(patch: Partial<CaptionStyle>): void {
+  const key = `style:${Object.keys(patch).sort().join(',')}`;
+  commitDoc(
+    (doc) => ({
+      ...doc,
+      style: {
+        ...doc.style,
+        ...patch,
+        presetId: 'presetId' in patch ? doc.style.presetId : 'custom',
+      },
+    }),
+    { coalesceKey: key },
+  );
+}
+
+/** Regroups every word into captions with new rules (one undo step). */
+function regroup(doc: ProjectDoc, rules: LineRules): ProjectDoc {
+  const words = doc.captions.flatMap((c) => c.words);
+  const mediaDuration = useAppStore.getState().media?.info.duration;
+  return {
+    ...doc,
+    rules,
+    captions: buildCaptions(words, rules, mediaDuration ? { mediaDuration } : {}),
+  };
+}
+
+/**
+ * Applies a preset: its look and its way of grouping words (TikTok shows 3 words at a time).
+ * Text and word timings survive because they live in the words; manual splits/merges are
+ * recomputed (and recoverable with undo).
+ */
+export function applyPreset(id: CaptionStyle['presetId']): void {
+  const preset = getPreset(id);
+  if (!preset) return;
+  const media = useAppStore.getState().media;
+  const base = defaultRulesFor(orientationOf(media?.info.width ?? 0, media?.info.height ?? 0));
+  commitDoc((doc) => regroup({ ...doc, style: preset.style }, { ...base, ...preset.rules }));
+}
+
+export function setRules(patch: Partial<LineRules>): void {
+  commitDoc((doc) => regroup(doc, { ...doc.rules, ...patch }));
+}
 
 /** Editor UI state that is not part of the document (and therefore not undoable). */
 interface EditorState {
@@ -18,6 +67,7 @@ interface EditorState {
   editingId: string | null;
   findOpen: boolean;
   helpOpen: boolean;
+  showSafeZones: boolean;
 }
 
 export const useEditor = create<EditorState>()(() => ({
@@ -25,6 +75,7 @@ export const useEditor = create<EditorState>()(() => ({
   editingId: null,
   findOpen: false,
   helpOpen: false,
+  showSafeZones: false,
 }));
 
 /** Starts a fresh history (new transcription or opened project). */

@@ -1,4 +1,4 @@
-import { Captions, Download, Wand2, X } from 'lucide-react';
+import { Captions, Download, Palette, Wand2, X } from 'lucide-react';
 import { useState } from 'react';
 import { formatBytes, formatDuration } from '../lib/media/validate';
 import { closeMedia } from '../state/actions';
@@ -8,11 +8,12 @@ import { EditorToolbar } from './editor/EditorToolbar';
 import { useEditorShortcuts } from './editor/shortcuts';
 import { Timeline } from './editor/Timeline';
 import { ExportPanel } from './panels/ExportPanel';
+import { StylePanel } from './panels/StylePanel';
 import { TranscribePanel } from './panels/TranscribePanel';
 import { Preview } from './preview/Preview';
 import { Tabs } from './ui/Tabs';
 
-type PanelId = 'transcribe' | 'captions' | 'export';
+type PanelId = 'transcribe' | 'captions' | 'style' | 'export';
 
 export function Workspace({ media }: { media: MediaState }) {
   const hasDoc = useAppStore((s) => s.doc !== null);
@@ -71,6 +72,12 @@ export function Workspace({ media }: { media: MediaState }) {
                 disabled: !hasDoc,
               },
               {
+                id: 'style',
+                label: 'Estilo',
+                icon: <Palette className="size-4" aria-hidden />,
+                disabled: !hasDoc,
+              },
+              {
                 id: 'export',
                 label: 'Exportar',
                 icon: <Download className="size-4" aria-hidden />,
@@ -81,6 +88,7 @@ export function Workspace({ media }: { media: MediaState }) {
           <div role="tabpanel" id={`panel-${panel}`} aria-labelledby={`tab-${panel}`}>
             {panel === 'transcribe' && <TranscribePanel />}
             {panel === 'captions' && <CaptionEditor />}
+            {panel === 'style' && <StylePanel />}
             {panel === 'export' && <ExportPanel />}
           </div>
         </aside>

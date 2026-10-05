@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { formatClock } from '../../lib/util/format';
 import { registerMediaElement, seek, togglePlay, usePlayback } from '../../state/playback';
 import type { MediaState } from '../../state/store';
+import { useEditor } from '../../state/editor';
+import { SafeZones } from './SafeZones';
 import { useCaptionCanvas } from './useCaptionCanvas';
 
 /**
@@ -13,6 +15,7 @@ export function Preview({ media }: { media: MediaState }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [playable, setPlayable] = useState(true);
+  const showSafeZones = useEditor((s) => s.showSafeZones);
   useCaptionCanvas(videoRef, canvasRef);
 
   useEffect(() => {
@@ -56,6 +59,7 @@ export function Preview({ media }: { media: MediaState }) {
             className="pointer-events-none absolute inset-0 size-full"
             aria-hidden
           />
+          {showSafeZones && <SafeZones width={width || 9} height={height || 16} />}
           {!playable && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/80 p-6 text-center text-sm text-muted">
               Tu navegador no puede reproducir este video, pero puedes transcribirlo y exportar los
