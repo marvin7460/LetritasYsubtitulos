@@ -2,6 +2,7 @@ import { TriangleAlert, X } from 'lucide-react';
 import { ERROR_MESSAGES, type RecoveryAction } from '../lib/errors';
 import { closeMedia, dismissError, startTranscription, updateSettings } from '../state/actions';
 import { useAppStore } from '../state/store';
+import { startVideoExport } from '../state/videoExport';
 import { Button } from './ui/Button';
 
 const ACTION_LABELS: Record<RecoveryAction, string> = {
@@ -39,6 +40,9 @@ export function ErrorBanner({ onAction }: ErrorBannerProps) {
       case 'smaller-model':
         updateSettings({ model: 'tiny' });
         void startTranscription();
+        break;
+      case 'export-webm':
+        void startVideoExport('webm', false);
         break;
       case 'retry':
         if (useAppStore.getState().audio) void startTranscription();

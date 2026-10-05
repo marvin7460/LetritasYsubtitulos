@@ -11,6 +11,7 @@ import type { Device } from '../lib/transcription/models';
 import { recordSpeed } from '../lib/transcription/speedHistory';
 import { replaceDoc } from './editor';
 import { pause, usePlayback } from './playback';
+import { cancelVideoExport, resetVideoExport } from './videoExport';
 import { INITIAL_TRANSCRIPTION, setTranscription, useAppStore, type Settings } from './store';
 
 export const transcriber = new TranscriberClient();
@@ -68,6 +69,8 @@ export function closeMedia(): void {
   extractController = null;
   transcriber.cancel();
   pause();
+  cancelVideoExport();
+  resetVideoExport();
   const { media } = useAppStore.getState();
   if (media) URL.revokeObjectURL(media.url);
   usePlayback.setState({ currentTime: 0, duration: 0, playing: false, activeCaptionId: null });

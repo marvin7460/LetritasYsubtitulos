@@ -6,6 +6,7 @@ import { toVtt } from '../../lib/export/vtt';
 import { baseName, downloadText } from '../../lib/util/download';
 import { useAppStore } from '../../state/store';
 import { Button } from '../ui/Button';
+import { VideoExportPanel } from './VideoExportPanel';
 
 export function ExportPanel() {
   const doc = useAppStore((s) => s.doc);
@@ -59,30 +60,33 @@ export function ExportPanel() {
   ];
 
   return (
-    <div className="space-y-3">
-      <h3 className="flex items-center gap-2 text-sm font-medium">
-        <FileText className="size-4" aria-hidden /> Archivos de subtítulos
-      </h3>
-      <div className="grid gap-2">
-        {formats.map((format) => (
-          <Button
-            key={format.id}
-            onClick={format.run}
-            className="justify-between"
-            data-testid={`export-${format.id}`}
-          >
-            <span className="flex items-center gap-2">
-              <Download className="size-4" aria-hidden />
-              {format.label}
-            </span>
-            <span className="truncate text-xs text-muted">{format.hint}</span>
-          </Button>
-        ))}
+    <div className="space-y-6">
+      <VideoExportPanel />
+      <div className="space-y-3">
+        <h3 className="flex items-center gap-2 text-sm font-medium">
+          <FileText className="size-4" aria-hidden /> Archivos de subtítulos
+        </h3>
+        <div className="grid gap-2">
+          {formats.map((format) => (
+            <Button
+              key={format.id}
+              onClick={format.run}
+              className="justify-between"
+              data-testid={`export-${format.id}`}
+            >
+              <span className="flex items-center gap-2">
+                <Download className="size-4" aria-hidden />
+                {format.label}
+              </span>
+              <span className="truncate text-xs text-muted">{format.hint}</span>
+            </Button>
+          ))}
+        </div>
+        <p className="text-xs text-muted">
+          Premiere y DaVinci importan SRT (texto y tiempos). Para conservar el estilo animado,
+          exporta el video con los subtítulos quemados.
+        </p>
       </div>
-      <p className="text-xs text-muted">
-        Premiere y DaVinci importan SRT (texto y tiempos). Para conservar el estilo animado, exporta
-        el video con los subtítulos quemados.
-      </p>
     </div>
   );
 }
