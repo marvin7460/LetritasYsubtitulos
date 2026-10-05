@@ -27,7 +27,7 @@ test('upload → transcribe → captions → export SRT and VTT', async ({ page 
 
 test('clicking a word seeks the video', async ({ page }) => {
   await uploadAndTranscribe(page);
-  const word = page.getByTestId('caption-item').nth(1).getByRole('button').nth(1);
+  const word = page.getByRole('button', { name: 'muestro', exact: true });
   await word.click();
   const time = await page
     .getByTestId('preview-video')
@@ -37,7 +37,7 @@ test('clicking a word seeks the video', async ({ page }) => {
 
 test('draws captions on the preview canvas', async ({ page }) => {
   await uploadAndTranscribe(page);
-  await page.getByTestId('caption-item').first().getByRole('button').nth(1).click();
+  await page.getByRole('button', { name: 'todos,', exact: true }).click();
   await expect
     .poll(() =>
       page.getByTestId('caption-canvas').evaluate((canvas: HTMLCanvasElement) => {

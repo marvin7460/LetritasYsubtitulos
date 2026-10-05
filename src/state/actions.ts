@@ -9,6 +9,7 @@ import { isAbortError, TranscriberClient } from '../lib/transcription/client';
 import { cleanHallucinations } from '../lib/transcription/hallucinations';
 import type { Device } from '../lib/transcription/models';
 import { recordSpeed } from '../lib/transcription/speedHistory';
+import { replaceDoc } from './editor';
 import { pause, usePlayback } from './playback';
 import { INITIAL_TRANSCRIPTION, setTranscription, useAppStore, type Settings } from './store';
 
@@ -75,6 +76,7 @@ export function closeMedia(): void {
     media: null,
     audio: null,
     doc: null,
+    history: null,
     extractProgress: 0,
     transcription: INITIAL_TRANSCRIPTION,
   });
@@ -122,9 +124,8 @@ export async function startTranscription(): Promise<void> {
 
     const rules = doc?.rules ?? defaultRulesFor(orientationOf(media.info.width, media.info.height));
     const captions = buildCaptions(words, rules, { mediaDuration: media.info.duration });
-    useAppStore.setState({
-      doc: { captions, rules, style: doc?.style ?? CLASSIC_STYLE, language: result.language },
-    });
+    // Re-transcribing replaces the captions as one undoable step; the style is kept.
+    replaceDoc({ captions, rules, style: doc?.style ?? CLASSIC_STYLE, language: result.language });
     setTranscription({
       status: 'done',
       progress: 1,

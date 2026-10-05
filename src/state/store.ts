@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import type { Caption, LineRules } from '../lib/captions/types';
 import type { MediaInfo } from '../lib/audio/types';
 import type { AppError } from '../lib/errors';
+import type { History } from '../lib/history/history';
 import type { CaptionStyle } from '../lib/render/style';
 import type { DeviceChoice, Device, ModelSize } from '../lib/transcription/models';
 import type { Capabilities, LanguageChoice } from '../lib/transcription/protocol';
@@ -68,7 +69,12 @@ export interface AppState {
   settings: Settings;
   capabilities: Capabilities | null;
   transcription: TranscriptionState;
+  /**
+   * The document on screen. Usually `history.present`; during a drag it is a transient version
+   * that only enters the history when the gesture ends (one undo step per drag).
+   */
   doc: ProjectDoc | null;
+  history: History<ProjectDoc> | null;
   error: AppError | null;
 }
 
@@ -92,6 +98,7 @@ export const useAppStore = create<AppState>()(() => ({
   capabilities: null,
   transcription: INITIAL_TRANSCRIPTION,
   doc: null,
+  history: null,
   error: null,
 }));
 
