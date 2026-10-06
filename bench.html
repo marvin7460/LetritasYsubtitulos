@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Letritas · Benchmarks</title>
+    <style>
+      body {
+        background: #0b0b12;
+        color: #ececf4;
+        font:
+          15px/1.5 system-ui,
+          sans-serif;
+        max-width: 960px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      button {
+        background: #ffe14d;
+        color: #1a1500;
+        border: 0;
+        border-radius: 10px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      pre {
+        background: #14141f;
+        border: 1px solid #2a2a3d;
+        border-radius: 10px;
+        padding: 1rem;
+        white-space: pre-wrap;
+      }
+      code {
+        color: #ffe14d;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Benchmarks de Letritas</h1>
+    <p>
+      Mide en <strong>tu</strong> equipo cuánto tarda en transcribir 60 s de audio con cada modelo
+      en WebGPU y en WASM, y cuánto tarda en exportar 60 s de video vertical con subtítulos. La
+      primera vez descarga los modelos (varios cientos de MB).
+    </p>
+    <p>
+      Parámetros opcionales: <code>?models=tiny,base</code>, <code>?devices=webgpu</code>,
+      <code>?only=export</code>, <code>?auto</code>.
+    </p>
+    <button id="run" type="button">Correr benchmarks</button>
+    <h2>Registro</h2>
+    <pre id="log"></pre>
+    <h2>Tabla (Markdown, lista para el README)</h2>
+    <pre id="table"></pre>
+    <script type="module" src="/src/bench/main.ts"></script>
+  </body>
+</html>

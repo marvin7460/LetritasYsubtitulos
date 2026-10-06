@@ -80,6 +80,9 @@ export function closeMedia(): void {
     audio: null,
     doc: null,
     history: null,
+    projectId: null,
+    saveStatus: 'idle',
+    isDemo: false,
     extractProgress: 0,
     transcription: INITIAL_TRANSCRIPTION,
   });

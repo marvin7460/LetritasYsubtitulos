@@ -18,6 +18,7 @@ export type AppErrorCode =
   | 'export-unsupported'
   | 'export-failed'
   | 'storage-failed'
+  | 'project-media-missing'
   | 'unknown';
 
 export interface AppErrorData {
@@ -163,6 +164,12 @@ export const ERROR_MESSAGES: Record<AppErrorCode, ErrorMessage> = {
     description:
       'El almacenamiento del navegador está lleno o bloqueado (por ejemplo, en modo incógnito). Tus subtítulos siguen aquí: descárgalos para no perderlos.',
     actions: ['download-subtitles', 'dismiss'],
+  },
+  'project-media-missing': {
+    title: 'Falta el video de este proyecto',
+    description:
+      'Tus subtítulos están guardados, pero el navegador no conservó el archivo de video (quizá por falta de espacio). Vuelve a elegir el archivo original para seguir editando.',
+    actions: ['choose-another-file'],
   },
   unknown: {
     title: 'Algo salió mal',

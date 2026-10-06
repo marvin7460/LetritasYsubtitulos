@@ -1,6 +1,9 @@
-import { Cpu, ShieldCheck, Sparkles } from 'lucide-react';
+import { Clapperboard, Cpu, ShieldCheck, Sparkles } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { loadMediaFile } from '../state/actions';
+import { loadDemo } from '../state/demo';
+import { ProjectsList } from './ProjectsList';
+import { Button } from './ui/Button';
 import { CapabilityChips } from './CapabilityChips';
 import { DropZone } from './DropZone';
 
@@ -26,9 +29,20 @@ export function Landing({ children }: { children?: ReactNode }) {
 
       <div className="w-full space-y-4">
         <DropZone onFile={(file) => void loadMediaFile(file)} />
+        <Button
+          variant="secondary"
+          size="lg"
+          onClick={() => void loadDemo()}
+          data-testid="demo-button"
+        >
+          <Clapperboard className="size-5 text-brand" aria-hidden />
+          Probar con un video de ejemplo
+        </Button>
         {children}
         <CapabilityChips />
       </div>
+
+      <ProjectsList />
 
       <ol className="grid w-full gap-3 text-left sm:grid-cols-3">
         <Step

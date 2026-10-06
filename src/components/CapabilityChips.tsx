@@ -1,9 +1,11 @@
-import { Cpu, Zap } from 'lucide-react';
+import { Cpu, WifiOff, Zap } from 'lucide-react';
+import { usePwa } from '../pwa';
 import { useAppStore } from '../state/store';
 
 /** Honest, at-a-glance status of what this browser can do. */
 export function CapabilityChips() {
   const capabilities = useAppStore((s) => s.capabilities);
+  const offlineReady = usePwa((s) => s.offlineReady);
   if (!capabilities) {
     return <p className="text-xs text-muted">Revisando qué puede hacer tu navegador…</p>;
   }
@@ -30,6 +32,15 @@ export function CapabilityChips() {
           ? `WASM con ${Math.min(4, Math.max(1, Math.ceil(capabilities.threads / 2)))} hilos`
           : 'WASM en un solo hilo'}
       </li>
+      {offlineReady && (
+        <li
+          className="flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1 text-muted"
+          data-testid="offline-ready"
+        >
+          <WifiOff className="size-3.5" aria-hidden />
+          Lista para usar sin internet
+        </li>
+      )}
     </ul>
   );
 }

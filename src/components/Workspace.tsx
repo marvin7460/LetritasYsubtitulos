@@ -17,6 +17,8 @@ type PanelId = 'transcribe' | 'captions' | 'style' | 'export';
 
 export function Workspace({ media }: { media: MediaState }) {
   const hasDoc = useAppStore((s) => s.doc !== null);
+  const isDemo = useAppStore((s) => s.isDemo);
+  const saveStatus = useAppStore((s) => s.saveStatus);
   const [selected, setSelected] = useState<PanelId>('transcribe');
   // Jump to the captions once a transcription exists, unless the user picked a tab already.
   const [autoSwitched, setAutoSwitched] = useState(false);
@@ -38,6 +40,13 @@ export function Workspace({ media }: { media: MediaState }) {
               {media.info.width > 0 && ` · ${media.info.width}×${media.info.height}`}
             </p>
             <div className="flex shrink-0 items-center gap-2">
+              {!isDemo && saveStatus !== 'idle' && (
+                <span className="text-xs text-muted" aria-live="polite" data-testid="save-status">
+                  {saveStatus === 'saving' && 'Guardando…'}
+                  {saveStatus === 'saved' && 'Guardado en este navegador'}
+                  {saveStatus === 'error' && 'No se pudo guardar'}
+                </span>
+              )}
               {hasDoc && <EditorToolbar />}
               <button
                 type="button"
@@ -48,6 +57,13 @@ export function Workspace({ media }: { media: MediaState }) {
               </button>
             </div>
           </div>
+          {isDemo && (
+            <p className="rounded-lg border border-violet/40 bg-violet/10 px-3 py-2 text-xs text-muted">
+              <strong className="text-fg">Video de ejemplo.</strong> La transcripción viene
+              precalculada para que no tengas que descargar el modelo. Edita, cambia el estilo y
+              exporta. En «Transcribir» puedes correr la IA real en tu navegador.
+            </p>
+          )}
           <Preview key={media.url} media={media} />
         </section>
 

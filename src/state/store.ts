@@ -75,6 +75,11 @@ export interface AppState {
    */
   doc: ProjectDoc | null;
   history: History<ProjectDoc> | null;
+  /** Saved project this workspace belongs to (null until the first autosave). */
+  projectId: string | null;
+  saveStatus: 'idle' | 'saving' | 'saved' | 'error';
+  /** The sample clip: not autosaved as a project. */
+  isDemo: boolean;
   error: AppError | null;
 }
 
@@ -99,6 +104,9 @@ export const useAppStore = create<AppState>()(() => ({
   transcription: INITIAL_TRANSCRIPTION,
   doc: null,
   history: null,
+  projectId: null,
+  saveStatus: 'idle',
+  isDemo: false,
   error: null,
 }));
 

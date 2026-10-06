@@ -5,6 +5,7 @@ import { Landing } from './components/Landing';
 import { LoadingMedia } from './components/LoadingMedia';
 import { Workspace } from './components/Workspace';
 import { closeMedia, probeCapabilities } from './state/actions';
+import { startAutosave } from './state/persistence';
 import { useAppStore } from './state/store';
 
 export function App() {
@@ -13,6 +14,7 @@ export function App() {
 
   useEffect(() => {
     void probeCapabilities();
+    return startAutosave();
   }, []);
 
   return (
